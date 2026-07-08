@@ -35,12 +35,12 @@ export async function getVoiceResponseForEvent(eventType: AlertType): Promise<Vo
 
 export function createSimulatedAlert(eventType: AlertType, response: VoiceResponse): AlertEvent {
   const severityByType: Record<AlertType, AlertEvent["severity"]> = {
-    help: "urgent",
-    confusion: "warning",
-    anxiety: "warning",
-    wandering: "urgent",
-    battery: "warning",
-    reminder: "info",
+    help: "high",
+    confusion: "medium",
+    anxiety: "medium",
+    wandering: "high",
+    battery: "medium",
+    reminder: "low",
   };
 
   return {
@@ -48,6 +48,7 @@ export function createSimulatedAlert(eventType: AlertType, response: VoiceRespon
     patientId: response.patientId,
     type: eventType,
     severity: severityByType[eventType],
+    status: "new",
     title: response.staffUpdate,
     description: response.nextStep,
     createdAt: "Just now",

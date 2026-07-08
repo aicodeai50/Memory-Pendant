@@ -125,7 +125,9 @@ export default function MemoryPendantSimulatorPage() {
         <p className="eyebrow">Dashboard update</p>
         <h2>Mock staff view after event</h2>
         {simulatedAlert && (
-          <div style={{ marginBottom: 18 }}>
+          <div className="card" style={{ marginBottom: 18 }}>
+            <p className="eyebrow">Staff notification preview</p>
+            <h3>Alert sent at {simulatedAlert.createdAt}</h3>
             <AlertCard alert={simulatedAlert} />
           </div>
         )}

@@ -1,4 +1,4 @@
-import { AlertCard } from "@/components/memory-pendant/AlertCard";
+import { DashboardAlertWorkflow } from "@/components/memory-pendant/DashboardAlertWorkflow";
 import { PatientCard } from "@/components/memory-pendant/PatientCard";
 import { getPatientSnapshots } from "@/lib/memory-pendant/api";
 
@@ -52,15 +52,7 @@ export default async function MemoryPendantDashboardPage() {
         </div>
       </section>
 
-      <section className="section">
-        <p className="eyebrow">Help alerts</p>
-        <h2>Recent staff attention items</h2>
-        <div className="grid grid-2">
-          {activeAlerts.map((alert) => (
-            <AlertCard alert={alert} key={alert.id} />
-          ))}
-        </div>
-      </section>
+      <DashboardAlertWorkflow initialSnapshots={snapshots} />
     </main>
   );
 }

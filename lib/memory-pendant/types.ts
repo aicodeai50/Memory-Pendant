@@ -6,7 +6,9 @@ export type WanderingRisk = "low" | "medium" | "high";
 
 export type ReminderStatus = "completed" | "upcoming" | "missed";
 
-export type AlertSeverity = "info" | "warning" | "urgent";
+export type AlertSeverity = "low" | "medium" | "high";
+
+export type AlertStatus = "new" | "acknowledged" | "resolved";
 
 export type AlertType = "help" | "confusion" | "anxiety" | "wandering" | "battery" | "reminder";
 
@@ -40,6 +42,7 @@ export type AlertEvent = {
   patientId: string;
   type: AlertType;
   severity: AlertSeverity;
+  status: AlertStatus;
   title: string;
   description: string;
   createdAt: string;
