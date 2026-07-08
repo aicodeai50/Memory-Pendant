@@ -1,6 +1,7 @@
 export {
   alerts,
   memoryModules,
+  patientMemories,
   patients,
   pendantDevices,
   reminders,

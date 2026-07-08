@@ -2,6 +2,7 @@ import type {
   AlertEvent,
   MemoryModule,
   Patient,
+  PatientMemory,
   PendantDevice,
   Reminder,
   VoiceResponse,
@@ -76,6 +77,87 @@ export const patients: Patient[] = [
       "Her favorite blanket is blue and folded on her chair.",
     ],
     dailyRoutine: ["8:45 AM medication", "2:00 PM family call", "7:00 PM hallway check-in"],
+  },
+];
+
+export const patientMemories: PatientMemory[] = [
+  {
+    patientId: "mara-chen",
+    safePhrases: [
+      "You are safe at Zentro Gardens.",
+      "Your daughter Lina will visit after lunch.",
+      "Let's take one slow breath together.",
+    ],
+    familyMemory: [
+      "Daughter Lina visits on Tuesdays and Fridays.",
+      "Grandson Noah plays piano and sends short recordings.",
+      "Mara loved growing lavender in her old backyard.",
+    ],
+    dailyRoutine: ["8:00 AM breakfast", "10:30 AM garden walk", "1:00 PM rest time"],
+    calmingInstructions: [
+      "Offer soft piano music before asking questions.",
+      "Mention lavender or garden walks when she seems uncertain.",
+    ],
+    thingsToAvoidSaying: [
+      "Do not say she already asked that question.",
+      "Avoid rushing her away from garden topics.",
+    ],
+    emergencyContactNotes: [
+      "Call Lina Chen first for urgent family updates.",
+      "If Mara refuses lunch, ask Lina about preferred foods before escalating.",
+    ],
+  },
+  {
+    patientId: "arthur-miles",
+    safePhrases: [
+      "You are in your room and the care team is nearby.",
+      "Your coat is safe in the closet.",
+      "We can look at your family photo together.",
+    ],
+    familyMemory: [
+      "Wife Elaine's photo is on the bedside table.",
+      "Arthur worked as a train conductor for 31 years.",
+      "He likes hearing that his son Ben called this morning.",
+    ],
+    dailyRoutine: ["7:30 AM tea", "11:00 AM mobility session", "6:15 PM quiet music"],
+    calmingInstructions: [
+      "Start with one simple reassurance before offering choices.",
+      "Use train route language when redirecting him toward his room.",
+    ],
+    thingsToAvoidSaying: [
+      "Avoid telling him he cannot go home.",
+      "Do not remove Elaine's photo during cleaning without replacing it immediately.",
+    ],
+    emergencyContactNotes: [
+      "Call Ben Miles for repeated anxiety that does not settle after staff support.",
+      "Mention any medication refusal during evening handoff.",
+    ],
+  },
+  {
+    patientId: "sofia-rivera",
+    safePhrases: [
+      "Hola Sofia, you are safe and Maria is nearby.",
+      "Let's walk back toward the blue chair together.",
+      "Your room is close. I can help you find it.",
+    ],
+    familyMemory: [
+      "Daughter Maria calls every evening.",
+      "Sofia loves bolero music and family recipes.",
+      "Her favorite blanket is blue and folded on her chair.",
+    ],
+    dailyRoutine: ["8:45 AM medication", "2:00 PM family call", "7:00 PM hallway check-in"],
+    calmingInstructions: [
+      "Use a familiar Spanish greeting before giving directions.",
+      "Redirect toward the blue chair instead of describing exits.",
+    ],
+    thingsToAvoidSaying: [
+      "Avoid saying the front door is locked.",
+      "Do not argue about whether Maria is present.",
+    ],
+    emergencyContactNotes: [
+      "Call Maria Rivera if Sofia approaches exits twice in one hour.",
+      "Escalate to Night Safety Team when pendant is offline and wandering risk is high.",
+    ],
   },
 ];
 

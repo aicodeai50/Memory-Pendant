@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import { AlertCard } from "@/components/memory-pendant/AlertCard";
 import { CalmSupportPanel } from "@/components/memory-pendant/CalmSupportPanel";
+import { CaregiverMemoryEditor } from "@/components/memory-pendant/CaregiverMemoryEditor";
 import { MemoryModuleCard } from "@/components/memory-pendant/MemoryModuleCard";
 import { PendantStatusCard } from "@/components/memory-pendant/PendantStatusCard";
 import { ReminderTimeline } from "@/components/memory-pendant/ReminderTimeline";
 import { WanderingRiskBadge } from "@/components/memory-pendant/WanderingRiskBadge";
-import { getPatientSnapshot, getPatients } from "@/lib/memory-pendant/api";
+import { getPatientMemory, getPatientSnapshot, getPatients } from "@/lib/memory-pendant/api";
 
 type PatientDetailPageProps = {
   params: Promise<{
@@ -22,8 +23,9 @@ export async function generateStaticParams() {
 export default async function PatientDetailPage({ params }: PatientDetailPageProps) {
   const { id } = await params;
   const snapshot = await getPatientSnapshot(id);
+  const memory = await getPatientMemory(id);
 
-  if (!snapshot) {
+  if (!snapshot || !memory) {
     notFound();
   }
 
@@ -85,6 +87,8 @@ export default async function PatientDetailPage({ params }: PatientDetailPagePro
           ))}
         </div>
       </section>
+
+      <CaregiverMemoryEditor initialMemory={memory} patientId={patient.id} />
 
       <section className="section grid grid-2">
         <article className="card">

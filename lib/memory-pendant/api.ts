@@ -1,4 +1,4 @@
-import { alerts, memoryModules, patients, pendantDevices, reminders, voiceResponses } from "./mock-data";
+import { alerts, memoryModules, patientMemories, patients, pendantDevices, reminders, voiceResponses } from "./mock-data";
 import {
   fetchAlertsFromBackend,
   fetchPatientByIdFromBackend,
@@ -7,7 +7,17 @@ import {
   fetchVoiceResponseFromBackend,
   sendSimulatorEventToBackend,
 } from "./backend-client";
-import type { AlertEvent, AlertStatus, AlertType, Patient, PatientSnapshot, PendantDevice, VoiceResponse } from "./types";
+import type {
+  AlertEvent,
+  AlertStatus,
+  AlertType,
+  Patient,
+  PatientMemory,
+  PatientMemoryUpdate,
+  PatientSnapshot,
+  PendantDevice,
+  VoiceResponse,
+} from "./types";
 
 export type ApiMode = "mock" | "real";
 
@@ -23,6 +33,7 @@ const severityByEventType: Record<AlertType, AlertEvent["severity"]> = {
 };
 
 let mockAlerts: AlertEvent[] = [...alerts];
+let mockPatientMemories: PatientMemory[] = [...patientMemories];
 
 async function withBackendFallback<T>(operationName: string, realRequest: () => Promise<T>, mockFallback: () => T): Promise<T> {
   if (API_MODE === "mock") {
@@ -106,6 +117,30 @@ function updateMockAlertStatus(alertId: string, status: AlertStatus): AlertEvent
   return updatedAlert;
 }
 
+function getMockPatientMemory(patientId: string): PatientMemory | undefined {
+  return mockPatientMemories.find((memory) => memory.patientId === patientId);
+}
+
+function updateMockPatientMemory(patientId: string, memoryUpdate: PatientMemoryUpdate): PatientMemory | undefined {
+  let updatedMemory: PatientMemory | undefined;
+
+  mockPatientMemories = mockPatientMemories.map((memory) => {
+    if (memory.patientId !== patientId) {
+      return memory;
+    }
+
+    updatedMemory = {
+      ...memory,
+      ...memoryUpdate,
+      patientId,
+    };
+
+    return updatedMemory;
+  });
+
+  return updatedMemory;
+}
+
 export async function getPatients(): Promise<Patient[]> {
   return withBackendFallback(
     "getPatients",
@@ -185,6 +220,31 @@ export async function resolveAlert(alertId: string): Promise<AlertEvent | undefi
       throw new Error("Real backend not connected yet");
     },
     () => updateMockAlertStatus(alertId, "resolved"),
+  );
+}
+
+export async function getPatientMemory(patientId: string): Promise<PatientMemory | undefined> {
+  return withBackendFallback(
+    "getPatientMemory",
+    async () => {
+      // TODO: Replace with encrypted Zentro backend storage for caregiver memory modules.
+      throw new Error("Real backend not connected yet");
+    },
+    () => getMockPatientMemory(patientId),
+  );
+}
+
+export async function updatePatientMemory(
+  patientId: string,
+  memoryUpdate: PatientMemoryUpdate,
+): Promise<PatientMemory | undefined> {
+  return withBackendFallback(
+    "updatePatientMemory",
+    async () => {
+      // TODO: Save caregiver memory modules to encrypted Zentro backend storage.
+      throw new Error("Real backend not connected yet");
+    },
+    () => updateMockPatientMemory(patientId, memoryUpdate),
   );
 }
 

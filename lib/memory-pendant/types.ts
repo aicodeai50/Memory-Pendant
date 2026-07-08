@@ -28,6 +28,18 @@ export type Patient = {
   dailyRoutine: string[];
 };
 
+export type PatientMemory = {
+  patientId: string;
+  safePhrases: string[];
+  familyMemory: string[];
+  dailyRoutine: string[];
+  calmingInstructions: string[];
+  thingsToAvoidSaying: string[];
+  emergencyContactNotes: string[];
+};
+
+export type PatientMemoryUpdate = Partial<Omit<PatientMemory, "patientId">>;
+
 export type PendantDevice = {
   id: string;
   patientId: string;
